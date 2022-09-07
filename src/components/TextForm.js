@@ -19,16 +19,7 @@ export default function TextForm(props) {
         setText("");
         props.showAlert("Text has been cleared","success");
     }
-    const handleTextLength=(text)=>{
-        let words = text.trim().split(" ").length;
-        if(words===1 && text.split(" ")[0]===""){
-            words = 0;
-            return words;
-        }
-        else{
-            return words;
-        }
-    }
+    
   return (
     <>
     <div className="container my-1" style = {{color: props.mode==='dark'?'white':'#042743'}}>
@@ -43,7 +34,7 @@ export default function TextForm(props) {
     </div>
     <div className="container my-3" style = {{color: props.mode==='dark'?'white':'#042743'}}>
         <h2>Your Text Summary</h2>
-        <p>{handleTextLength(text)} words and {text.length} characters</p>
+        <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
         <p> {0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} minutes to read</p>
         <h2>Preview</h2>
         <p>{text.length>0?text:'Nothing to preview'}</p>
